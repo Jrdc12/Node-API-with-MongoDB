@@ -20,15 +20,12 @@ app.use(express.json()) // for parsing application.json
 const port = 3000
 
 const userRoute = require('./routes/User')
-app.use('/api', userRoute)
+const employeeRoute = require('./routes/Employees')
+app.use('/api', userRoute, employeeRoute)
 
-app.get('/api', (req, res) => {
+app.get('/', (req, res) => {
     res.send("HOME!")
 })
-
-
-
-
 
 
 

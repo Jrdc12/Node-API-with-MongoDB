@@ -1,42 +1,48 @@
 const express = require('express')
 const router = express.Router()
+const User = require('../model/UserModel')
+
+
 
 // Post Method
-router.post('/user/signup', (req, res) => {
-    res.status(201).send("User is created")
+router.post('/user/signup', async (req, res) => {
+    const user = new User({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+    })
+
+    try {
+        const savedUser = await user.save()
+        res.status(201).send(savedUser)
+    } catch (error) {
+        res.status(400).json({message: error.message})
+    }
 })
 
-router.post('/emp/employees', (req, res) => {
-    res.status(201).send("create new employee")
+//Login Method
+router.post('/user/login', async (req, res) => {
+
+    const {
+        username,
+        password
+    } = req.body;
+    
+    const user = await User.findOne({
+        username: username
+    })
+ 
+    if (user) {
+        if (user.password === password) {
+            res.status(200).json({"username" : user.username, "password": user.password})
+        } 
+    } else {
+        res.status(400).json({
+            "status": false,
+            "message": "Invalid UserName or Password"
+        })
+    }
 })
-
-router.post('/user/login', (req, res) => {
-    res.status(200).send("Logged In")
-})
-
-// Get Method
-router.get('/emp/employees', (req, res) => {
-    res.status(200).send("All employees")
-})
-
-// Get user by employee ID
-router.get('/emp/employees/:id', (req, res) => {
-    res.status(200).send("Employee by ID")
-})
-
-// Put method updating employees
-router.put('/emp/employees/:id', (req, res) => {
-    res.status(200).send("Updated")
-})
-
-// Delete method
-router.delete('/emp/employees/:id', (req, res) => {
-    res.status(200).send("Deleted")
-})
-
-
-
-
 
 
 module.exports = router
