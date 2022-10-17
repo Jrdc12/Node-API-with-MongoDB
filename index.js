@@ -24,7 +24,7 @@ const employeeRoute = require('./routes/Employees')
 app.use('/api', userRoute, employeeRoute)
 
 app.get('/', (req, res) => {
-    res.send("HOME!")
+    res.send("Welcome to my API")
 })
 
 

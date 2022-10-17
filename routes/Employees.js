@@ -13,6 +13,18 @@ router.post('/emp/employees', async (req, res) => {
     })
 
     try {
+        const oldEmployee = await Employee.findOne({
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            email: req.body.email,
+        })
+
+        if (oldEmployee) {
+            return res.status(409).json({
+                message: "Employee already exists"
+            })
+        }
+
         const savedEmployee = await employee.save()
         res.status(201).send(savedEmployee)
     } catch (error) {
@@ -47,6 +59,7 @@ router.get('/emp/employees/:id', async (req, res) => {
 router.put('/emp/employees/:id', async (req, res) => {
     try {
         const employee = await Employee.findById(req.params.id)
+
         if (req.body.first_name != null) {
             employee.first_name = req.body.first_name
         }
