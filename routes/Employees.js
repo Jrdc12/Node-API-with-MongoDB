@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Employee = require('../model/EmployeesModel')
 
-//COMMENT
+// REMOVING THIS TO SEE IF IT IS GOOD
 
 // Post Method
 router.post('/emp/employees', async (req, res) => {
