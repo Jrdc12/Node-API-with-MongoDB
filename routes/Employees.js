@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const Employee = require('../model/EmployeesModel')
 
+//COMMENT
+
 // Post Method
 router.post('/emp/employees', async (req, res) => {
     const employee = new Employee({
