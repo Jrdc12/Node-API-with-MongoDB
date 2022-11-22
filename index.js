@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const express = require('express')
+const cors = require('cors')
 const mongoose = require('mongoose')
 const mongoString = process.env.DATABASE_URL
 
@@ -16,6 +17,7 @@ database.once('connected', () => {
 })
 
 const app = express()
+app.use(cors())
 app.use(express.json()) // for parsing application.json
 const port = 3000
 
