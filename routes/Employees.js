@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const Employee = require('../model/EmployeesModel')
 
-// jasldkfjalskdjfalsasdfasdfasdfsadfsadfsa
 
 // Post Method
 router.post('/emp/employees', async (req, res) => {
@@ -46,7 +45,7 @@ router.get('/emp/employees', async (req, res) => {
     }
 })
 
-router.get('/emp/employees/:id', async (req, res) => {
+router.get('/emp/employees:id', async (req, res) => {
     try {
         const employee = req.body
         const employeeId = await Employee.findById(req.params.id)
@@ -58,7 +57,7 @@ router.get('/emp/employees/:id', async (req, res) => {
 })
 
 // PUT Method
-router.put('/emp/employees/:id', async (req, res) => {
+router.put('/emp/employees:id', async (req, res) => {
     try {
         const employee = await Employee.findById(req.params.id)
 
@@ -85,7 +84,7 @@ router.put('/emp/employees/:id', async (req, res) => {
 })
 
 // Delete Method
-router.delete('/emp/employees/:id', async (req, res) => {
+router.delete('/emp/employees:id', async (req, res) => {
     try {
         const employee = await Employee.findById(req.params.id)
         const deletedEmployee = await employee.remove()

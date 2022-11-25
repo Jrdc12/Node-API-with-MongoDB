@@ -36,8 +36,11 @@ router.post('/user/signup', async (req, res) => {
         )
         
         savedUser.token = token
-
-        res.status(201).send(savedUser)
+        res.header("Access-Control-Allow-Origin", "*");
+        res.status(201).send({
+            "message": "User created successfully",
+            user: savedUser
+        })
 
     } catch (error) {
         res.status(400).json({message: error.message})
